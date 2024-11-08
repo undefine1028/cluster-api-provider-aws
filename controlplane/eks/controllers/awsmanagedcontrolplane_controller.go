@@ -68,8 +68,7 @@ const (
 
 var defaultEKSSecurityGroupRoles = []infrav1.SecurityGroupRole{
 	infrav1.SecurityGroupEKSNodeAdditional,
-	infrav1.SecurityGroupAPIServerLB,
-	infrav1.SecurityGroupControlPlane,
+	ekscontrolplanev1.SecurityGroupCluster,
 }
 
 // securityGroupRolesForControlPlane returns the security group roles determined by the control plane configuration.

@@ -92,7 +92,6 @@ func (s *Service) ReconcileSecurityGroups() error {
 		sg := s.ec2SecurityGroupToSecurityGroup(securityGroupOverride)
 		sgs[sg.Name] = sg
 	}
-
 	// First iteration makes sure that the security group are valid and fully created.
 	for i := range s.roles {
 		role := s.roles[i]

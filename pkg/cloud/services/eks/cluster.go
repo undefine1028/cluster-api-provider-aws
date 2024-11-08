@@ -309,6 +309,10 @@ func makeVpcConfig(subnets infrav1.Subnets, endpointAccess ekscontrolplanev1.End
 	if ok {
 		vpcConfig.SecurityGroupIds = append(vpcConfig.SecurityGroupIds, &sg.ID)
 	}
+	sg, ok = securityGroups[ekscontrolplanev1.SecurityGroupCluster]
+	if ok {
+		vpcConfig.SecurityGroupIds = append(vpcConfig.SecurityGroupIds, &sg.ID)
+	}
 	return vpcConfig, nil
 }
 
@@ -374,7 +378,6 @@ func (s *Service) createCluster(eksClusterName string) (*eks.Cluster, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "couldn't create vpc config for cluster")
 	}
-
 	var netConfig *eks.KubernetesNetworkConfigRequest
 	if s.scope.VPC().IsIPv6Enabled() {
 		netConfig = &eks.KubernetesNetworkConfigRequest{
